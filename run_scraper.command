@@ -46,25 +46,39 @@ pip install --quiet -r requirements-playwright.txt
 echo "==> Ensuring Chromium is installed..."
 python -m playwright install chromium
 
-# Run the scraper.
-echo
-echo "==> Running scraper. This can take several minutes."
-echo "    Progress appears below; the window will stay open when done."
-echo
-
-python scraper_playwright.py
-
-# Show the result.
+# Run the scraper. Try each supported site in order; stop at the first
+# one that returns listings. This handles the case where one site's
+# bot-protection blocks us but another doesn't.
 OUT="$(pwd)/florida_lots.json"
+COUNT=0
+
+for SITE in landsearch landflip landandfarm landwatch; do
+    echo
+    echo "==> Trying site: $SITE (this can take a few minutes)"
+    echo
+    python scraper_playwright.py --site "$SITE" || true
+
+    if [ -f "$OUT" ]; then
+        COUNT=$(python -c "import json; print(len(json.load(open('$OUT'))))" 2>/dev/null || echo 0)
+    fi
+
+    if [ "$COUNT" -gt 0 ] 2>/dev/null; then
+        echo
+        echo "==> Got $COUNT listings from $SITE."
+        break
+    fi
+
+    echo "==> $SITE returned 0 listings. Trying next site..."
+done
+
 echo
-if [ -f "$OUT" ]; then
-    COUNT=$(python -c "import json; print(len(json.load(open('$OUT'))))" 2>/dev/null || echo "?")
+if [ "$COUNT" -gt 0 ] 2>/dev/null; then
     echo "==> Done. $COUNT listings saved to:"
     echo "    $OUT"
-    # Reveal the file in Finder.
     open -R "$OUT" || true
 else
-    echo "==> No output file was produced."
+    echo "==> All sites returned 0 listings."
+    echo "    Check debug_page_1.html / debug_page_1.png for the last-tried site."
 fi
 
 echo

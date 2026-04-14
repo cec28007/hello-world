@@ -39,14 +39,61 @@ from bs4 import BeautifulSoup
 # Config
 # ---------------------------------------------------------------------------
 
-BASE_URL = "https://www.landwatch.com"
+# ---------------------------------------------------------------------------
+# Site adapters
+# ---------------------------------------------------------------------------
+#
+# Each adapter is a dict with:
+#   base_url          canonical origin
+#   page_url(mn, mx, page) -> str      builds the results URL for a page number
+#
+# The HTML parser (``parse_listings``) is site-agnostic because it walks
+# schema.org JSON-LD, which every major real-estate site embeds.
 
-# LandWatch's filter-slug URL format. Order of slugs matters to LandWatch;
-# this ordering (state -> sale status -> price -> acres) is the canonical one
-# their own faceted navigation produces.
-SEARCH_PATH_TEMPLATE = (
-    "/florida-land-for-sale/available/under-{max_price}/acres-over-{min_acres}"
-)
+
+def _landsearch_url(min_acres: float, max_price: float, page: int) -> str:
+    base = (
+        f"https://www.landsearch.com/properties/florida/search/"
+        f"under-{int(max_price)}/{int(min_acres)}-acres"
+    )
+    return base if page == 1 else f"{base}/page/{page}"
+
+
+def _landflip_url(min_acres: float, max_price: float, page: int) -> str:
+    base = (
+        f"https://www.landflip.com/land-for-sale/florida/"
+        f"1-minprice/{int(max_price)}-maxprice/{int(min_acres)}-minacreage"
+    )
+    return base if page == 1 else f"{base}/page/{page}"
+
+
+def _landwatch_url(min_acres: float, max_price: float, page: int) -> str:
+    base = (
+        f"https://www.landwatch.com/florida-land-for-sale/available/"
+        f"under-{int(max_price)}/acres-over-{int(min_acres)}"
+    )
+    return base if page == 1 else f"{base}/page-{page}"
+
+
+def _landandfarm_url(min_acres: float, max_price: float, page: int) -> str:
+    base = (
+        f"https://www.landandfarm.com/search/florida-land-for-sale/"
+        f"?price-max={int(max_price)}&acres-min={int(min_acres)}"
+    )
+    return base if page == 1 else f"{base}&page={page}"
+
+
+SITES: dict[str, dict] = {
+    "landsearch": {"base_url": "https://www.landsearch.com", "page_url": _landsearch_url},
+    "landflip": {"base_url": "https://www.landflip.com", "page_url": _landflip_url},
+    "landwatch": {"base_url": "https://www.landwatch.com", "page_url": _landwatch_url},
+    "landandfarm": {"base_url": "https://www.landandfarm.com", "page_url": _landandfarm_url},
+}
+
+DEFAULT_SITE = "landsearch"
+
+# Back-compat alias used elsewhere in this module.
+BASE_URL = SITES[DEFAULT_SITE]["base_url"]
 
 # Rotate through a couple of realistic desktop User-Agents. LandWatch
 # fingerprints aggressively on UA + Accept-Language + Accept combinations.
@@ -350,25 +397,28 @@ def passes_filters(
 # ---------------------------------------------------------------------------
 
 
-def page_urls(min_acres: float, max_price: float) -> Iterator[str]:
-    base = BASE_URL + SEARCH_PATH_TEMPLATE.format(
-        max_price=int(max_price),
-        # LandWatch accepts integers here; 1-acre floor needs the "over-1" slug.
-        min_acres=int(min_acres) if float(min_acres).is_integer() else min_acres,
-    )
-    yield base
-    for page in range(2, MAX_PAGES + 1):
-        yield f"{base}/page-{page}"
+def page_urls(
+    min_acres: float, max_price: float, site: str = DEFAULT_SITE
+) -> Iterator[str]:
+    if site not in SITES:
+        raise ValueError(f"Unknown site {site!r}; choose from {list(SITES)}")
+    build = SITES[site]["page_url"]
+    for page in range(1, MAX_PAGES + 1):
+        yield build(min_acres, max_price, page)
 
 
 def scrape(
-    min_acres: float, max_price: float, *, verbose: bool = True
+    min_acres: float,
+    max_price: float,
+    *,
+    site: str = DEFAULT_SITE,
+    verbose: bool = True,
 ) -> list[Listing]:
     session = build_session()
     results: dict[str, Listing] = {}
     last_page: int | None = None
 
-    for i, url in enumerate(page_urls(min_acres, max_price), start=1):
+    for i, url in enumerate(page_urls(min_acres, max_price, site), start=1):
         if last_page is not None and i > last_page:
             break
         if verbose:
@@ -434,11 +484,20 @@ def main(argv: list[str] | None = None) -> int:
         default=Path("florida_lots.json"),
         help="Output JSON file (default: florida_lots.json)",
     )
+    parser.add_argument(
+        "--site",
+        choices=sorted(SITES),
+        default=DEFAULT_SITE,
+        help=f"Which site to scrape (default: {DEFAULT_SITE})",
+    )
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args(argv)
 
     listings = scrape(
-        args.min_acres, args.max_price, verbose=not args.quiet
+        args.min_acres,
+        args.max_price,
+        site=args.site,
+        verbose=not args.quiet,
     )
 
     write_json(listings, args.out)

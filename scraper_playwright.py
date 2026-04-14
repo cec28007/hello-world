@@ -29,8 +29,10 @@ from playwright.async_api import (
 
 # Reuse everything we already built for the requests-based scraper.
 from scraper import (
+    DEFAULT_SITE,
     MAX_DELAY_SEC,
     MIN_DELAY_SEC,
+    SITES,
     Listing,
     detect_last_page,
     page_urls,
@@ -86,7 +88,11 @@ async def fetch_html(page, url: str, *, verbose: bool) -> str | None:
 
 
 async def scrape_async(
-    min_acres: float, max_price: float, *, verbose: bool = True
+    min_acres: float,
+    max_price: float,
+    *,
+    site: str = DEFAULT_SITE,
+    verbose: bool = True,
 ) -> list[Listing]:
     results: dict[str, Listing] = {}
     last_page: int | None = None
@@ -101,7 +107,7 @@ async def scrape_async(
         )
         page = await context.new_page()
 
-        for i, url in enumerate(page_urls(min_acres, max_price), start=1):
+        for i, url in enumerate(page_urls(min_acres, max_price, site), start=1):
             if last_page is not None and i > last_page:
                 break
             if verbose:
@@ -171,11 +177,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-acres", type=float, default=1.0)
     parser.add_argument("--max-price", type=float, default=25000.0)
     parser.add_argument("--out", type=Path, default=Path("florida_lots.json"))
+    parser.add_argument(
+        "--site",
+        choices=sorted(SITES),
+        default=DEFAULT_SITE,
+        help=f"Which site to scrape (default: {DEFAULT_SITE})",
+    )
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args(argv)
 
     listings = asyncio.run(
-        scrape_async(args.min_acres, args.max_price, verbose=not args.quiet)
+        scrape_async(
+            args.min_acres,
+            args.max_price,
+            site=args.site,
+            verbose=not args.quiet,
+        )
     )
     write_json(listings, args.out)
     print(f"\nSaved {len(listings)} listings to {args.out}", file=sys.stderr)
