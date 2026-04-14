@@ -2,23 +2,39 @@
 
 ## Florida vacant-land scraper
 
-`scraper.py` searches LandWatch for Florida lots that are **for sale**,
-**bigger than 1 acre**, and **priced under $25,000**, then writes the results
+Two scrapers that search LandWatch for Florida lots that are **for sale**,
+**bigger than 1 acre**, and **priced under $25,000**, then write the results
 to a JSON file.
 
-### Install
+- **`scraper.py`** — plain `requests` + `BeautifulSoup`. Fast and
+  light, but will fail if LandWatch's Cloudflare check flags your IP.
+- **`scraper_playwright.py`** — drives a real headless Chromium browser,
+  which passes the Cloudflare / PerimeterX bot-check. Slower but reliable.
+
+Both produce the same output schema.
+
+### Install — requests version
 
 ```
 pip install -r requirements.txt
+python scraper.py
 ```
 
-### Run
+### Install — Playwright version (recommended)
 
 ```
-python scraper.py                       # defaults: >1 acre, <$25,000 -> florida_lots.json
-python scraper.py --max-price 20000     # cheaper cap
-python scraper.py --min-acres 2.5       # bigger lots
-python scraper.py --out results.json    # custom output path
+pip install -r requirements-playwright.txt
+playwright install chromium
+python scraper_playwright.py
+```
+
+### Common flags
+
+```
+--min-acres 1.0          # default
+--max-price 25000        # default
+--out florida_lots.json  # default output path
+--quiet                  # suppress progress logs
 ```
 
 Each entry in the output JSON has: `url`, `title`, `price`, `acres`,
@@ -26,14 +42,12 @@ Each entry in the output JSON has: `url`, `title`, `price`, `acres`,
 
 ### Important caveats
 
-- **LandWatch's Terms of Service prohibit automated scraping.** This script
-  is provided for personal research only. Run it slowly and don't
-  redistribute the scraped data.
-- The script uses polite 3–7 second delays between pages and realistic
-  browser headers, but LandWatch has aggressive bot protection. If you get
-  HTTP 403 or a CAPTCHA page, plain `requests` won't work — you'll need to
-  port the same logic to Playwright (headless browser).
+- **LandWatch's Terms of Service prohibit automated scraping.** These
+  scripts are provided for personal research only. Run them slowly and
+  don't redistribute the scraped data.
+- Both scrapers use 3–7 second random delays between pages.
 - Listing markup changes over time. The parser first tries the embedded
   `application/ld+json` schema.org data (most stable), then falls back to
   CSS selectors. If both break, inspect a page's HTML and update
-  `parse_listings()`.
+  `parse_listings()` in `scraper.py` — the Playwright variant reuses the
+  same function.
