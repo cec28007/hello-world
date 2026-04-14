@@ -113,7 +113,30 @@ async def scrape_async(
 
             page_listings = parse_listings(html)
             if verbose:
-                print(f"  parsed {len(page_listings)} listings", file=sys.stderr)
+                final_url = page.url
+                title = (await page.title()) or ""
+                print(
+                    f"  parsed {len(page_listings)} listings "
+                    f"(final_url={final_url!r}, title={title!r})",
+                    file=sys.stderr,
+                )
+
+            # On page 1, if we got zero listings, dump the raw page so we
+            # can diagnose: wrong URL pattern, bot challenge, or parser drift.
+            if i == 1 and not page_listings:
+                debug_html = Path("debug_page_1.html")
+                debug_png = Path("debug_page_1.png")
+                debug_html.write_text(html, encoding="utf-8")
+                try:
+                    await page.screenshot(path=str(debug_png), full_page=True)
+                except Exception:
+                    pass
+                print(
+                    f"  WROTE DIAGNOSTICS: {debug_html.resolve()} "
+                    f"and {debug_png.resolve()}",
+                    file=sys.stderr,
+                )
+
             if not page_listings:
                 break
 
