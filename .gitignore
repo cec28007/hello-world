@@ -1,4 +1,7 @@
 __pycache__/
 *.pyc
 florida_lots.json
+debug_page_1.html
+debug_page_1.png
 .venv/
+.env
