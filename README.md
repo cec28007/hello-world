@@ -28,6 +28,25 @@ playwright install chromium
 python scraper_playwright.py
 ```
 
+### No-terminal option (macOS)
+
+After the one-time clone, just **double-click `run_scraper.command`** in
+Finder. It auto-updates the repo, sets up a local Python env on first run,
+installs Chromium, runs the scraper, and reveals `florida_lots.json` in
+Finder when done.
+
+One-time setup in Terminal:
+
+```
+git clone https://github.com/cec28007/hello-world.git
+cd hello-world
+git checkout claude/florida-lots-scraper-3Q570
+chmod +x run_scraper.command
+```
+
+After that, open the `hello-world` folder in Finder and double-click
+`run_scraper.command` whenever you want fresh results.
+
 ### Common flags
 
 ```
