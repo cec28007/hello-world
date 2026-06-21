@@ -89,12 +89,12 @@ window.TESLA_DATA = {
   ],
 
   "resale_estimates": [
-    { "date": "2020-06-01", "odometer": 11500, "value": 48000, "source": "KBB private party" },
-    { "date": "2021-06-01", "odometer": 23000, "value": 44000, "source": "KBB private party" },
-    { "date": "2022-06-01", "odometer": 35000, "value": 41000, "source": "KBB private party" },
-    { "date": "2023-06-01", "odometer": 48000, "value": 35000, "source": "KBB private party" },
-    { "date": "2024-06-01", "odometer": 60000, "value": 30000, "source": "KBB private party" },
-    { "date": "2025-06-01", "odometer": 70000, "value": 26000, "source": "KBB private party" },
-    { "date": "2026-06-15", "odometer": 78200, "value": 23000, "source": "KBB private party" }
+    { "date": "2020-06-01", "odometer": 11500, "value": 20000, "source": "KBB private party" },
+    { "date": "2021-06-01", "odometer": 23000, "value": 19000, "source": "KBB private party" },
+    { "date": "2022-06-01", "odometer": 35000, "value": 18000, "source": "KBB private party" },
+    { "date": "2023-06-01", "odometer": 48000, "value": 16500, "source": "KBB private party" },
+    { "date": "2024-06-01", "odometer": 60000, "value": 15500, "source": "KBB private party" },
+    { "date": "2025-06-01", "odometer": 70000, "value": 14500, "source": "KBB private party" },
+    { "date": "2026-06-15", "odometer": 78200, "value": 13500, "source": "KBB private party" }
   ]
 };
