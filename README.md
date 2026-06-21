@@ -98,18 +98,25 @@ Set them as environment variables, or put them in a git-ignored
 
 `TESLA_VIN` defaults to `vehicle.vin` in `data.js` if set there.
 
-### Running it on a schedule
+### Free, fully automated setup
 
-Pick whatever you already have:
+For a free, hands-off pipeline — the official **Tesla Fleet API** running on an
+**Oracle Always Free VM** that pulls daily and commits the data back — follow
+the step-by-step runbook in **[`docs/fleet-and-oracle.md`](docs/fleet-and-oracle.md)**.
+Helpers included:
+
+- `tesla_auth.py partner` / `tesla_auth.py login` — one-time domain registration
+  and OAuth to get a refresh token (saved to git-ignored `tesla_config.json`).
+- `deploy/` — `gen-keys.sh` (Fleet API key pair), `Caddyfile` (serves the
+  required public-key file over HTTPS), and a `systemd` service + timer
+  (`run_fetch.sh`) that pulls daily and pushes `data.js`.
+
+### Or just a simple cron
 
 ```bash
-# cron — every day at 8am
-0 8 * * *  cd /path/to/repo && /usr/bin/python3 fetch_tesla.py tessie >> fetch.log 2>&1
+# every day at 8am
+0 8 * * *  cd /path/to/repo && /usr/bin/python3 fetch_tesla.py fleet >> fetch.log 2>&1
 ```
-
-On macOS use a `launchd` plist; or run it from a GitHub Action on a `schedule:`
-trigger with the token stored as a repo secret. Each run just updates the
-data and you commit when you like.
 
 ## Data model (`data.js`)
 

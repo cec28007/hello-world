@@ -73,13 +73,17 @@ def fetch_tessie(vin):
     }
 
 
+# Regional Fleet API base; override with TESLA_FLEET_BASE (eu, etc.).
+FLEET_BASE_NA = "https://fleet-api.prd.na.vn.cloud.tesla.com"
+
+
 def fetch_fleet(vin):
-    base = cfg("TESLA_FLEET_BASE")
+    base = cfg("TESLA_FLEET_BASE", FLEET_BASE_NA)
     client_id = cfg("TESLA_CLIENT_ID")
     refresh = cfg("TESLA_REFRESH_TOKEN")
-    if not (base and client_id and refresh):
-        raise SystemExit("Fleet backend needs TESLA_FLEET_BASE, TESLA_CLIENT_ID, "
-                         "TESLA_REFRESH_TOKEN. See https://developer.tesla.com.")
+    if not (client_id and refresh):
+        raise SystemExit("Fleet backend needs TESLA_CLIENT_ID and TESLA_REFRESH_TOKEN "
+                         "(run tesla_auth.py login first). See docs/fleet-and-oracle.md.")
     # 1) refresh -> access token
     body = json.dumps({
         "grant_type": "refresh_token",

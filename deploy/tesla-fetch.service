@@ -1,0 +1,15 @@
+[Unit]
+Description=Pull Tesla data into the ownership dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Adjust User and paths to match your VM.
+User=ubuntu
+WorkingDirectory=/home/ubuntu/hello-world
+Environment=REPO_DIR=/home/ubuntu/hello-world
+Environment=BRANCH=claude/tesla-ownership-dashboard-2wy9fm
+Environment=TESLA_BACKEND=fleet
+# Credentials live in tesla_config.json (git-ignored) in WorkingDirectory.
+ExecStart=/usr/bin/env bash deploy/run_fetch.sh
