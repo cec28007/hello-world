@@ -8,43 +8,10 @@ Usage:
     python3 add_entry.py            # interactive menu
     python3 add_entry.py odometer   # jump straight to a category
 """
-import json
-import os
-import re
 import sys
 from datetime import date
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-DATA_FILE = os.path.join(HERE, "data.js")
-PREFIX = "window.TESLA_DATA = "
-
-
-def load():
-    with open(DATA_FILE, "r", encoding="utf-8") as fh:
-        text = fh.read()
-    start = text.index("{", text.rindex(PREFIX))
-    depth, end = 0, None
-    for i in range(start, len(text)):
-        c = text[i]
-        if c == "{":
-            depth += 1
-        elif c == "}":
-            depth -= 1
-            if depth == 0:
-                end = i + 1
-                break
-    if end is None:
-        raise SystemExit("Could not parse data.js — is the object intact?")
-    obj = json.loads(text[start:end])
-    return text, start, end, obj
-
-
-def save(text, start, end, obj):
-    body = json.dumps(obj, indent=2, ensure_ascii=False)
-    new_text = text[:start] + body + text[end:]
-    with open(DATA_FILE, "w", encoding="utf-8") as fh:
-        fh.write(new_text)
-    print("\n✓ Saved to data.js — refresh index.html to see it.")
+from tesla_store import load, save
 
 
 def ask(label, cast=str, default=None, optional=False):
@@ -151,6 +118,7 @@ def main():
 
     ACTIONS[choice][1](obj)
     save(text, start, end, obj)
+    print("\n✓ Saved to data.js — refresh index.html to see it.")
 
 
 if __name__ == "__main__":

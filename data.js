@@ -24,7 +24,7 @@ window.TESLA_DATA = {
     "vin": "",
     "purchase_date": "2019-06-15",
     "purchase_odometer": 10,
-    "purchase_price": 64990,
+    "purchase_price": 21000,
     "original_rated_range_mi": 310,
     "original_usable_kwh": 75,
     "battery_warranty_years": 8,

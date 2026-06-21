@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+
+# Local Tesla API credentials — never commit tokens
+tesla_config.json
+.cache.json

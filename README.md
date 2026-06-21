@@ -55,6 +55,62 @@ inside `window.TESLA_DATA = { ... }`. Each list is documented by example.
 
 Then refresh `index.html`.
 
+## Pulling live data automatically (`fetch_tesla.py`)
+
+Instead of typing readings in, you can pull the car's current odometer and
+battery straight into `data.js`:
+
+```bash
+python3 fetch_tesla.py mock --dry-run   # try the pipeline, no network/credentials
+python3 fetch_tesla.py tessie           # real pull via Tessie
+```
+
+It appends today's odometer reading and a battery test (the current range is
+extrapolated to a 100%-charge equivalent so the degradation trend stays
+consistent). Running it more than once a day **updates** today's entry rather
+than piling up duplicates. Then refresh `index.html`.
+
+### Choosing a backend
+
+| Backend | Setup | Notes |
+|---------|-------|-------|
+| `tessie` | [Tessie](https://tessie.com) account → API token | **Easiest.** Paid service (free trial). One token, one request. |
+| `fleet` | Tesla [developer app](https://developer.tesla.com) + paired virtual key | Official & free, but heavier setup. Marked experimental. |
+| `mock` | none | Canned values for testing the pipeline offline. |
+
+Note: Tesla retired the old open "Owner API", so live data now requires either
+a third-party service (Tessie) or the official Fleet API. *TeslaMate* is another
+option — a self-hosted app that logs your car to its own database — but it's a
+full service to run, so it's only worth it if you already want that.
+
+### Credentials
+
+Set them as environment variables, or put them in a git-ignored
+`tesla_config.json` next to the scripts:
+
+```jsonc
+// tesla_config.json  (never committed)
+{
+  "TESSIE_TOKEN": "your-token",
+  "TESLA_VIN": "5YJ3E1EA0KF000000"
+}
+```
+
+`TESLA_VIN` defaults to `vehicle.vin` in `data.js` if set there.
+
+### Running it on a schedule
+
+Pick whatever you already have:
+
+```bash
+# cron — every day at 8am
+0 8 * * *  cd /path/to/repo && /usr/bin/python3 fetch_tesla.py tessie >> fetch.log 2>&1
+```
+
+On macOS use a `launchd` plist; or run it from a GitHub Action on a `schedule:`
+trigger with the token stored as a repo secret. Each run just updates the
+data and you commit when you like.
+
 ## Data model (`data.js`)
 
 | List | Tracks | Key fields |
