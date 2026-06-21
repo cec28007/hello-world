@@ -1,0 +1,11 @@
+[Unit]
+Description=Run the Tesla data pull daily
+
+[Timer]
+# Daily at 08:00 local time, with a randomized delay to be gentle on the API.
+OnCalendar=*-*-* 08:00:00
+RandomizedDelaySec=900
+Persistent=true
+
+[Install]
+WantedBy=timers.target

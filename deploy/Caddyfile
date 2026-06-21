@@ -1,0 +1,13 @@
+# Minimal Caddy site to satisfy the Fleet API public-key requirement.
+# Caddy fetches a free Let's Encrypt cert automatically (Tesla needs HTTPS).
+# Replace tesla.example.com with your domain, then: sudo caddy run --config Caddyfile
+#
+# Open ports 80 and 443 in the Oracle "Security List"/NSG and the VM firewall.
+
+tesla.example.com {
+	root * /var/www/tesla
+	file_server
+
+	# Optional: also serve the dashboard itself at https://tesla.example.com/
+	# (copy index.html, data.js into /var/www/tesla to enable this).
+}
