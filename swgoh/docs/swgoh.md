@@ -47,19 +47,20 @@ team?" Cost is pay-as-you-go per question (typically a fraction of a cent).
 
 ## Free, always-on deploy (Oracle Always-Free VM)
 
-Reuse the Tesla runbook in [`fleet-and-oracle.md`](fleet-and-oracle.md) for the
-VM, DNS, and Caddy basics, then:
+Set up the VM, a DNS subdomain, and Caddy, then use the units in `deploy/`:
 
-1. **Serve it.** Run `ask_server.py` as a systemd service (copy the pattern in
-   `deploy/tesla-fetch.service`), with `ANTHROPIC_API_KEY` set in the unit's
-   `Environment=`. Have Caddy reverse-proxy your subdomain to `127.0.0.1:8787`:
+1. **Serve it.** Install `deploy/swgoh-ask.service` (set `ANTHROPIC_API_KEY` in
+   its `Environment=` line), then `systemctl enable --now swgoh-ask`. Point Caddy
+   at it with `deploy/Caddyfile`:
    ```
    swgoh.yourdomain.com {
        reverse_proxy 127.0.0.1:8787
    }
    ```
-2. **Refresh daily.** Add a timer that runs `fetch_swgoh.py swgoh` once a day and
-   commits `swgoh_data.js` (mirror `deploy/tesla-fetch.timer` + `run_fetch.sh`).
+2. **Refresh daily.** Install `deploy/swgoh-fetch.service` + `swgoh-fetch.timer`
+   (they run `deploy/run_fetch.sh`, which pulls the roster and commits
+   `swgoh_data.js` only when it changed), then
+   `systemctl enable --now swgoh-fetch.timer`.
 
 That's it — `https://swgoh.yourdomain.com` works from any device, no laptop
 needed.
