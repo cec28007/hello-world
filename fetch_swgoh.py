@@ -18,6 +18,12 @@ Guild data is available too:
     --guild           also pull the player's guild (id taken from their profile)
     --guild-id <id>   pull a specific guild by its swgoh.gg id (no ally needed)
 
+No outbound access to swgoh.gg? Render from JSON you saved/pasted instead
+(open https://swgoh.gg/api/player/<ally_code>/ in a browser and save it):
+
+    --from-file <path>        render a saved player JSON ('-' reads stdin)
+    --guild-from-file <path>  render a saved guild JSON
+
 Config is read from environment variables, or from a local `swgoh_config.json`
 (git-ignored) of the same keys:
 
@@ -65,6 +71,19 @@ def cfg(key, default=None):
         if key in data:
             return data[key]
     return default
+
+
+def _load_json(path):
+    """Load a saved swgoh.gg JSON response; '-' reads stdin."""
+    try:
+        if path == "-":
+            return json.load(sys.stdin)
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except FileNotFoundError:
+        raise SystemExit("No such file: %s" % path)
+    except json.JSONDecodeError as e:
+        raise SystemExit("%s is not valid JSON: %s" % (path, e))
 
 
 def _opt_value(arg, argv, i):
@@ -257,6 +276,8 @@ def main():
     ally_arg = None
     guild_flag = False
     guild_id_arg = None
+    from_file = None
+    guild_from_file = None
     top_n = 10
     positionals = []
     argv = sys.argv[1:]
@@ -267,9 +288,14 @@ def main():
             dry = True
         elif a == "--guild":
             guild_flag = True
+        elif a.startswith("--guild-from-file"):
+            guild_from_file, i = _opt_value(a, argv, i)
+            guild_flag = True
         elif a.startswith("--guild-id"):
             guild_id_arg, i = _opt_value(a, argv, i)
             guild_flag = True
+        elif a.startswith("--from-file"):
+            from_file, i = _opt_value(a, argv, i)
         elif a.startswith("--ally"):
             ally_arg, i = _opt_value(a, argv, i)
         elif a.startswith("--units"):
@@ -278,6 +304,19 @@ def main():
         elif not a.startswith("-"):
             positionals.append(a)
         i += 1
+
+    # Offline mode: render summaries from JSON saved/pasted from swgoh.gg
+    # (open https://swgoh.gg/api/player/<code>/ in a browser, save the JSON).
+    # No network, so it works even where swgoh.gg egress is blocked.
+    if from_file or guild_from_file:
+        if from_file:
+            payload = _load_json(from_file)
+            print_summary(payload, top_n)
+        if guild_from_file:
+            if from_file:
+                print()
+            print_guild_summary(_load_json(guild_from_file), top_n)
+        return
 
     backend = (positionals[0] if positionals and not positionals[0].isdigit()
                else cfg("SWGOH_BACKEND", "live")).lower()

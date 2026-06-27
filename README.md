@@ -171,6 +171,17 @@ The ally code can also come from `SWGOH_ALLY_CODE` (env var or a git-ignored
 `swgoh_config.json`), and a guild id from `SWGOH_GUILD_ID`. The profile/guild
 must be **public/synced on swgoh.gg** for data to come back.
 
+**No outbound access to swgoh.gg?** (e.g. a sandbox with a restricted egress
+policy) — the API is just a URL, so open it in a browser, save the JSON, and
+render it offline with no network:
+
+```bash
+# Browser: open https://swgoh.gg/api/player/611121817/  → save as player.json
+python3 fetch_swgoh.py --from-file player.json
+python3 fetch_swgoh.py --from-file player.json --guild-from-file guild.json
+cat player.json | python3 fetch_swgoh.py --from-file -    # or via stdin
+```
+
 | Backend | Setup | Notes |
 |---------|-------|-------|
 | `live` | none (just an ally code) | **Default.** Needs outbound access to `swgoh.gg`. |
