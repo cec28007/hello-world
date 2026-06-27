@@ -4,3 +4,7 @@ __pycache__/
 # Local Tesla API credentials — never commit tokens
 tesla_config.json
 .cache.json
+
+# SWGOH: local config + fetched roster data
+swgoh_config.json
+swgoh_data.json
