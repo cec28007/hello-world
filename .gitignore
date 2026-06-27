@@ -8,3 +8,4 @@ tesla_config.json
 # SWGOH: local config + fetched roster data
 swgoh_config.json
 swgoh_data.json
+swgoh_guild_data.json

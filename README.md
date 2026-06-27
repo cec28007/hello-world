@@ -155,9 +155,21 @@ python3 fetch_swgoh.py --ally 611121817 --units 15   # top 15 characters
 python3 fetch_swgoh.py --ally 611-121-817 --dry-run  # print, don't save
 ```
 
+**Guild data** is available too — `--guild` also pulls the guild for that
+player (the guild id is read off their profile), and `--guild-id <id>` pulls a
+specific guild on its own:
+
+```bash
+python3 fetch_swgoh.py --ally 611-121-817 --guild   # player + their guild
+python3 fetch_swgoh.py --guild-id <guild-id> --units 20   # guild only
+```
+
+The guild summary lists member count, total galactic power, and the top members
+by GP; the full response is saved to `swgoh_guild_data.json` (git-ignored).
+
 The ally code can also come from `SWGOH_ALLY_CODE` (env var or a git-ignored
-`swgoh_config.json`). The profile must be **public/synced on swgoh.gg** for data
-to come back.
+`swgoh_config.json`), and a guild id from `SWGOH_GUILD_ID`. The profile/guild
+must be **public/synced on swgoh.gg** for data to come back.
 
 | Backend | Setup | Notes |
 |---------|-------|-------|
