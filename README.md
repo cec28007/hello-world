@@ -137,3 +137,56 @@ numbers (or wipe the lists and start logging).
 Charge to 100% and read the **rated range** shown on the display, then log it as
 a `battery_tests` entry. Capacity % is computed as that range ÷ the original
 310 mi. Do it the same way each time (same conditions) for a clean trend.
+
+---
+
+## Bonus: SWGOH roster fetch (`fetch_swgoh.py`)
+
+Unrelated to the Tesla dashboard — a small, zero-dependency script that pulls a
+**Star Wars: Galaxy of Heroes** player profile from the free
+[swgoh.gg](https://swgoh.gg) public API using your ally code. It prints a
+summary (name, level, guild, galactic power, roster counts, top characters) and
+saves the full JSON response to `swgoh_data.json` (git-ignored).
+
+```bash
+python3 fetch_swgoh.py mock                  # offline demo, no network
+python3 fetch_swgoh.py --ally 611-121-817    # real pull from swgoh.gg
+python3 fetch_swgoh.py --ally 611121817 --units 15   # top 15 characters
+python3 fetch_swgoh.py --ally 611-121-817 --dry-run  # print, don't save
+```
+
+**Guild data** is available too — `--guild` also pulls the guild for that
+player (the guild id is read off their profile), and `--guild-id <id>` pulls a
+specific guild on its own:
+
+```bash
+python3 fetch_swgoh.py --ally 611-121-817 --guild   # player + their guild
+python3 fetch_swgoh.py --guild-id <guild-id> --units 20   # guild only
+```
+
+The guild summary lists member count, total galactic power, and the top members
+by GP; the full response is saved to `swgoh_guild_data.json` (git-ignored).
+
+The ally code can also come from `SWGOH_ALLY_CODE` (env var or a git-ignored
+`swgoh_config.json`), and a guild id from `SWGOH_GUILD_ID`. The profile/guild
+must be **public/synced on swgoh.gg** for data to come back.
+
+**No outbound access to swgoh.gg?** (e.g. a sandbox with a restricted egress
+policy) — the API is just a URL, so open it in a browser, save the JSON, and
+render it offline with no network:
+
+```bash
+# Browser: open https://swgoh.gg/api/player/611121817/  → save as player.json
+python3 fetch_swgoh.py --from-file player.json
+python3 fetch_swgoh.py --from-file player.json --guild-from-file guild.json
+cat player.json | python3 fetch_swgoh.py --from-file -    # or via stdin
+```
+
+| Backend | Setup | Notes |
+|---------|-------|-------|
+| `live` | none (just an ally code) | **Default.** Needs outbound access to `swgoh.gg`. |
+| `mock` | none | Canned profile for testing the output offline. |
+
+Note: this requires network access to `swgoh.gg`. In sandboxes/CI with a
+restricted egress policy the request is rejected (HTTP 403 at the proxy) — run
+it from an unrestricted network, or add `swgoh.gg` to the allowlist.
