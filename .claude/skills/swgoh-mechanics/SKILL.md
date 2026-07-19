@@ -47,8 +47,16 @@ and its meta are patch-dependent — answering from memory produces mistakes.
 | `reference/07-decision-framework.md` | **How to decide what to build/farm next** — the prioritization logic |
 | `reference/08-player-profile.md` | Jaxen Sol's roster, active projects, and current plan |
 | `reference/09-team-analysis.md` | **Team-level roster analysis** — which teams you can field / build toward |
+| `reference/10-data-sources.md` | **What data can/can't be pulled** (swgoh.gg vs HotUtils); currency/inventory limits |
 | `data/meta_teams.json` | Curated meta-teams database (kept in sync with `06`; re-verify tiers) |
+| `data/manual_inputs.example.json` | Template for data NO tool exposes (crystals/credits/tickets/energy); copy to `manual_inputs.json` |
 | `tools/analyze_roster.py` | Script that scores a roster export against the database |
+
+**Data availability (see `10-data-sources.md`):** the roster export covers
+roster/mods/arena+fleet teams/ranks/GAC-rating. **Crystals, credits, energy, GL
+tickets, and gear inventory are NOT in any free source** — and even paid HotUtils
+doesn't surface currency balances. For "can I afford X" questions, read
+`data/manual_inputs.json` (if present) or ask the player; never guess.
 
 > **Keep `data/meta_teams.json` in sync with `reference/06-meta-teams.md`.** 06 is the
 > source of truth for tiers and which faction leader is the real wall (e.g., BH are
