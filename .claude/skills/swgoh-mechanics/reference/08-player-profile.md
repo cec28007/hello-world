@@ -55,15 +55,26 @@ Sith Trooper to 7★ for the upper tiers.
 
 ## Defensive walls available (non-GL)
 
-Deep roster — 108 non-GL units at R5+. Best R5+ defensive teams:
+Deep roster — 108 non-GL units at R5+. **Corrected against `06-meta-teams.md`
+(community data), which overturns earlier advice:**
 
-- **Bounty Hunters** (Bossk lead) — tanky/punishing; doubles as Profundity crew.
-- **Clones** (Rex/Echo lead) — sticky; becomes elite with **General Skywalker
-  (GAS)** as leader (GAS currently R1 — top upside project).
-- **Galactic Republic** (Padmé lead) — stall wall.
-- **Mandalorians** (Beskar Mando lead) — all R9-10, already done.
-- **Imperial Troopers** (Range Trooper lead) — all R9, burst punish.
-- **Resistance** (Hero Finn lead) — assist-spam, hard to kill.
+- **Galactic Republic (Padmé lead)** — ✅ **READY genuine wall.** Protection-up /
+  buff-immunity stall. This is the best non-GL wall you can field *today*.
+- **Great Mothers Nightsisters** — 🔨 top S-tier build (own all; gear/relic +
+  star Great Mothers/Merrin). Best non-GL wall once built.
+- **Clones (General Skywalker lead)** — 🔨 S-tier build; needs **GAS** (6★ g12 r1
+  → 7★ + relic). Rex/Echo-lead clones without GAS are only a B wall.
+- **Inquisitors** — mid (B) wall; LOCKED on Grand Inquisitor + Reva.
+- ❌ **Bounty Hunters (Bossk) are NOT a defensive wall** — Bossk gives no opening
+  speed and gets CC'd/bursted. **Use BH on OFFENSE.** (Corrects earlier advice.)
+- ❌ **Beskar-Mando lead Mandalorians / Range-Trooper Imperial Troopers are NOT
+  meta walls.** The real versions need **Bo-Katan (Mand'alor)** (not owned) and
+  **Iden Versio** (owned only 4★ g1) — neither is fieldable now.
+- **Resistance / CLS Rebels** — only B/situational walls; GL Leia is the real
+  Rebel wall.
+
+> Run `tools/analyze_roster.py --mode gac-def` on the latest export for the live
+> READY / CLOSE / LOCKED breakdown.
 
 ## Key build projects (ranked)
 
@@ -91,9 +102,10 @@ Deep roster — 108 non-GL units at R5+. Best R5+ defensive teams:
 
 ## Standing recommendations (the plan)
 
-- **Defense:** Rey + Leia (GL walls) → fill with Bounty Hunters / Mandalorians /
-  Clones; build Great Mothers Nightsisters as the marquee non-GL wall.
-- **Offense:** Profundity (finish abilities) + JML for the hard team; deep relic
-  squads clear the rest with **zero-death** clears (retreat/retry messy fights).
+- **Defense:** Rey + Leia (GL walls) + **Padmé GR** (ready non-GL wall); build
+  **Great Mothers Nightsisters** (marquee) and **GAS Clones** as the next walls.
+- **Offense:** Profundity (finish abilities) + JML for the hard team + **Bounty
+  Hunters (Bossk)**; deep relic squads clear the rest with **zero-death** clears
+  (retreat/retry messy fights).
 - **Farming focus:** Dark-side tickets for SLKR (on nodes that also drop needed
   gear); daily arena climbs for crystals; Era tokens into Great Mothers/Merrin.

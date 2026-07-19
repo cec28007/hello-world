@@ -36,18 +36,6 @@ and its meta are patch-dependent — answering from memory produces mistakes.
 
 ## Reference index
 
-**Available now:**
-
-| File | Covers |
-|------|--------|
-| `reference/07-decision-framework.md` | **How to decide what to build/farm next** — the prioritization logic |
-| `reference/08-player-profile.md` | Jaxen Sol's roster, active projects, and current plan |
-| `reference/09-team-analysis.md` | **Team-level roster analysis** — which teams you can field / build toward |
-| `data/meta_teams.json` | Curated meta-teams database (seed; expand + re-verify tiers) |
-| `tools/analyze_roster.py` | Script that scores a roster export against the database |
-
-**Deep-dive mechanics (being populated from source-verified research):**
-
 | File | Covers |
 |------|--------|
 | `reference/01-gac.md` | Grand Arena Championship: formats (5v5/3v3), board, **banner scoring**, defense holds, leagues/divisions/skill rating, rewards |
@@ -56,6 +44,16 @@ and its meta are patch-dependent — answering from memory produces mistakes.
 | `reference/04-progression.md` | Stars/shards, gear/G13, **relics**, **mods** (speed!), zetas/omicrons, datacrons, **Lightspeed tokens** |
 | `reference/05-currencies-economy.md` | Crystals, energy types, every store & currency, **Era currency**, resource priorities |
 | `reference/06-meta-teams.md` | Current best **GAC defensive & offensive teams**, GL priority (snapshot — verify) |
+| `reference/07-decision-framework.md` | **How to decide what to build/farm next** — the prioritization logic |
+| `reference/08-player-profile.md` | Jaxen Sol's roster, active projects, and current plan |
+| `reference/09-team-analysis.md` | **Team-level roster analysis** — which teams you can field / build toward |
+| `data/meta_teams.json` | Curated meta-teams database (kept in sync with `06`; re-verify tiers) |
+| `tools/analyze_roster.py` | Script that scores a roster export against the database |
+
+> **Keep `data/meta_teams.json` in sync with `reference/06-meta-teams.md`.** 06 is the
+> source of truth for tiers and which faction leader is the real wall (e.g., BH are
+> an OFFENSE team, not a defensive wall; the Mandalorian wall needs Bo-Katan
+> Mand'alor). If they disagree, fix the JSON.
 
 ## Team analysis workflow
 

@@ -18,8 +18,8 @@
       "members": ["THIRDSISTER", "FIFTHBROTHER", "NINTHSISTER", "SEVENTHSISTER"],
       "alternates": ["SECONDSISTER", "EIGHTHBROTHER", "MARROK"],
       "modes": ["gac-def", "gac-off", "tw"],
-      "tier": "A",
-      "notes": "Sticky, confuse/marked synergy. Needs Grand Inquisitor AND Third Sister (Reva) as the leaders to function."
+      "tier": "B",
+      "notes": "Solid MID-tier wall (bleeds banners, not a hard lock). Needs Grand Inquisitor AND Third Sister (Reva) as the leaders to function."
     },
     {
       "name": "Bounty Hunters (Bossk)",
@@ -27,9 +27,9 @@
       "leader": "BOSSK",
       "members": ["JANGOFETT", "GREEFKARGA", "IG11", "THEMANDALORIAN"],
       "alternates": ["BOBAFETT", "CADBANE", "EMBO", "DENGAR"],
-      "modes": ["gac-def", "gac-off", "tw"],
+      "modes": ["gac-off", "tw"],
       "tier": "A",
-      "notes": "Tanky, thermal-detonator pressure. Doubles as Profundity fleet crew (efficient investment)."
+      "notes": "OFFENSE team — NOT a defensive wall. Bossk needs taunt up immediately and gives no opening speed, so he gets CC'd/bursted on defense. Great on offense; also crews the Profundity fleet."
     },
     {
       "name": "Clones (General Skywalker)",
@@ -52,24 +52,34 @@
       "notes": "Stall wall: protection-up, dispels, hard to burst. Forces long fights where attackers bleed units."
     },
     {
-      "name": "Mandalorians (Beskar Mando)",
+      "name": "Mandalorians (Bo-Katan Mand'alor)",
       "faction": "Mandalorian",
-      "leader": "THEMANDALORIANBESKARARMOR",
-      "members": ["THEMANDALORIAN", "GARSAXON", "IMPERIALSUPERCOMMANDO", "CANDEROUSORDO"],
-      "alternates": ["PAZVIZSLA", "CARADUNE"],
+      "leader": "BOKATANMANDALORE",
+      "members": ["THEMANDALORIAN", "PAZVIZSLA", "BOKATANKRYZE", "IG12"],
+      "alternates": ["GARSAXON", "CANDEROUSORDO", "IMPERIALSUPERCOMMANDO"],
       "modes": ["gac-def", "tw"],
-      "tier": "B",
-      "notes": "Sustain/sticky. Strong when all members are high-relic."
+      "tier": "A",
+      "notes": "The REAL Mandalorian wall — needs Bo-Katan (Mand'alor) as leader. Stacks Defense per debuff / per living Mando; heals on first ally death. A Beskar-Mando lead team is NOT a meta wall."
     },
     {
-      "name": "Imperial Troopers (Range Trooper)",
-      "faction": "Empire",
-      "leader": "RANGETROOPER",
-      "members": ["DEATHTROOPER", "SHORETROOPER", "DARKTROOPER", "SCOUTTROOPER_V3"],
-      "alternates": ["MOFFGIDEONS1", "VADER"],
+      "name": "Sith Empire (Malgus) [BUILD-TOWARD]",
+      "faction": "Sith Empire",
+      "leader": "DARTHMALGUS",
+      "members": ["DARTHREVAN", "BASTILASHANDARK", "DARTHMALAK", "DARTHTALON"],
+      "alternates": ["SITHTROOPER", "DARTHSION"],
       "modes": ["gac-def", "tw"],
+      "tier": "A",
+      "notes": "Strong banner-bleed wall (Sith get big GAC bonuses). Requires unlocking Malgus + Sith. Build-toward."
+    },
+    {
+      "name": "Imperial Troopers (Iden)",
+      "faction": "Empire",
+      "leader": "IDENVERSIOEMPIRE",
+      "members": ["GENERALVEERS", "RANGETROOPER", "SHORETROOPER", "DEATHTROOPER"],
+      "alternates": ["DARKTROOPER", "SCOUTTROOPER_V3", "MOFFGIDEONS1"],
+      "modes": ["gac-off", "gac-def", "tw"],
       "tier": "B",
-      "notes": "High burst that punishes greedy attacks."
+      "notes": "Out-of-turn offense engine — best as AGGRO/OFFENSE (Iden lead). Only a mid wall on defense. Needs Iden Versio built."
     },
     {
       "name": "Resistance (Hero Finn)",
