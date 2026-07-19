@@ -1,0 +1,175 @@
+{
+  "_comment": "Curated SWGOH meta-teams database consumed by tools/analyze_roster.py. base_id values match swgoh.gg export ids. TIERS: S (top/meta-defining), A (strong/competitive), B (viable/situational). MODES: gac-def, gac-off, fleet, tw, raid, conquest. This is a SEED — meta is patch-dependent; verify/expand against current tier lists. Units not owned simply report as missing (correct for build-toward teams).",
+  "teams": [
+    {
+      "name": "Great Mothers Nightsisters",
+      "faction": "Nightsister",
+      "leader": "GREATMOTHERS",
+      "members": ["MERRIN", "MOTHERTALZIN", "DAKA", "NIGHTSISTERZOMBIE"],
+      "alternates": ["ASAJVENTRESS", "TALIA", "NIGHTSISTERSPIRIT"],
+      "modes": ["gac-def", "tw"],
+      "tier": "S",
+      "notes": "Best non-GL defensive wall in the game. Revive/summon stall punishes attackers on auto."
+    },
+    {
+      "name": "Inquisitors (Grand Inquisitor)",
+      "faction": "Inquisitorius",
+      "leader": "GRANDINQUISITOR",
+      "members": ["THIRDSISTER", "FIFTHBROTHER", "NINTHSISTER", "SEVENTHSISTER"],
+      "alternates": ["SECONDSISTER", "EIGHTHBROTHER", "MARROK"],
+      "modes": ["gac-def", "gac-off", "tw"],
+      "tier": "A",
+      "notes": "Sticky, confuse/marked synergy. Needs Grand Inquisitor AND Third Sister (Reva) as the leaders to function."
+    },
+    {
+      "name": "Bounty Hunters (Bossk)",
+      "faction": "Bounty Hunter",
+      "leader": "BOSSK",
+      "members": ["JANGOFETT", "GREEFKARGA", "IG11", "THEMANDALORIAN"],
+      "alternates": ["BOBAFETT", "CADBANE", "EMBO", "DENGAR"],
+      "modes": ["gac-def", "gac-off", "tw"],
+      "tier": "A",
+      "notes": "Tanky, thermal-detonator pressure. Doubles as Profundity fleet crew (efficient investment)."
+    },
+    {
+      "name": "Clones (General Skywalker)",
+      "faction": "Galactic Republic / Clone",
+      "leader": "GENERALSKYWALKER",
+      "members": ["CT5555", "CT210408", "ARCTROOPER501ST", "CT7567"],
+      "alternates": ["CAPTAINREX", "SHAAKTI"],
+      "modes": ["gac-def", "gac-off", "tw"],
+      "tier": "S",
+      "notes": "Elite wall WITH General Skywalker (GAS) as leader. Counter/assist chains. Without GAS, use Rex/Echo lead (drops to B)."
+    },
+    {
+      "name": "Galactic Republic (Padme)",
+      "faction": "Galactic Republic",
+      "leader": "PADMEAMIDALA",
+      "members": ["ANAKINKNIGHT", "AHSOKATANO", "GENERALKENOBI", "SHAAKTI"],
+      "alternates": ["MACEWINDU", "CT7567"],
+      "modes": ["gac-def", "tw"],
+      "tier": "A",
+      "notes": "Stall wall: protection-up, dispels, hard to burst. Forces long fights where attackers bleed units."
+    },
+    {
+      "name": "Mandalorians (Beskar Mando)",
+      "faction": "Mandalorian",
+      "leader": "THEMANDALORIANBESKARARMOR",
+      "members": ["THEMANDALORIAN", "GARSAXON", "IMPERIALSUPERCOMMANDO", "CANDEROUSORDO"],
+      "alternates": ["PAZVIZSLA", "CARADUNE"],
+      "modes": ["gac-def", "tw"],
+      "tier": "B",
+      "notes": "Sustain/sticky. Strong when all members are high-relic."
+    },
+    {
+      "name": "Imperial Troopers (Range Trooper)",
+      "faction": "Empire",
+      "leader": "RANGETROOPER",
+      "members": ["DEATHTROOPER", "SHORETROOPER", "DARKTROOPER", "SCOUTTROOPER_V3"],
+      "alternates": ["MOFFGIDEONS1", "VADER"],
+      "modes": ["gac-def", "tw"],
+      "tier": "B",
+      "notes": "High burst that punishes greedy attacks."
+    },
+    {
+      "name": "Resistance (Hero Finn)",
+      "faction": "Resistance",
+      "leader": "EPIXFINN",
+      "members": ["EPIXPOE", "FINN", "BB8", "REYJEDITRAINING"],
+      "alternates": ["POE", "AMILYNHOLDO", "REY"],
+      "modes": ["gac-def", "tw"],
+      "tier": "B",
+      "notes": "Assist-spam and self-sustain; hard to kill on auto."
+    },
+    {
+      "name": "Rebels (Commander Luke)",
+      "faction": "Rebel",
+      "leader": "COMMANDERLUKESKYWALKER",
+      "members": ["HANSOLO", "CHEWBACCALEGENDARY", "C3POLEGENDARY", "R2D2_LEGENDARY"],
+      "alternates": ["C3POCHEWBACCA", "HOTHHAN", "STORMTROOPERHAN"],
+      "modes": ["gac-def", "gac-off", "tw"],
+      "tier": "B",
+      "notes": "Sticky classic Rebels. Note: GL Leia lead is far stronger if available."
+    },
+    {
+      "name": "GL Leia (Rebels)",
+      "faction": "Rebel / Galactic Legend",
+      "leader": "GLLEIA",
+      "members": ["COMMANDERLUKESKYWALKER", "HANSOLO", "CHEWBACCALEGENDARY", "R2D2_LEGENDARY"],
+      "alternates": ["C3POLEGENDARY", "C3POCHEWBACCA"],
+      "modes": ["gac-def", "gac-off", "tw"],
+      "tier": "S",
+      "notes": "Galactic Legend wall. Stealth/culling. Top defensive anchor."
+    },
+    {
+      "name": "GL Rey (Resistance)",
+      "faction": "Resistance / Galactic Legend",
+      "leader": "GLREY",
+      "members": ["BB8", "FINN", "POE", "AMILYNHOLDO"],
+      "alternates": ["REYJEDITRAINING", "REY", "EPIXFINN", "EPIXPOE"],
+      "modes": ["gac-def", "gac-off", "tw"],
+      "tier": "S",
+      "notes": "Best pure defensive-hold GL. Finish her Ultimate (Tier VI) for full strength."
+    },
+    {
+      "name": "Jedi Master Luke (Jedi)",
+      "faction": "Jedi / Galactic Legend",
+      "leader": "GRANDMASTERLUKE",
+      "members": ["GENERALKENOBI", "ANAKINKNIGHT", "AHSOKATANO", "OLDBENKENOBI"],
+      "alternates": ["MACEWINDU", "JEDIKNIGHTLUKE", "JEDIKNIGHTREVAN"],
+      "modes": ["gac-off", "gac-def", "tw"],
+      "tier": "S",
+      "notes": "Best OFFENSIVE GL owned — keep for cracking the enemy's hardest team."
+    },
+    {
+      "name": "Supreme Leader Kylo Ren (First Order)",
+      "faction": "First Order / Galactic Legend",
+      "leader": "SUPREMELEADERKYLOREN",
+      "members": ["KYLORENUNMASKED", "GENERALHUX", "FIRSTORDEREXECUTIONER", "FOSITHTROOPER"],
+      "alternates": ["KYLOREN", "PHASMA", "FIRSTORDEROFFICERMALE"],
+      "modes": ["gac-off", "gac-def", "tw"],
+      "tier": "S",
+      "notes": "In-progress 4th GL. Requirement squad mostly R7-9; Sith Trooper needs 7 stars for upper tiers."
+    },
+    {
+      "name": "FLEET: Profundity + Bounty Hunters",
+      "faction": "Fleet",
+      "leader": "CAPITALRADDUS",
+      "members": ["HOUNDSTOOTH", "XANADUBLOOD", "IG2000", "SLAVE1"],
+      "alternates": ["MILLENNIUMFALCON", "EBONHAWK", "GEONOSIANSTARFIGHTER1"],
+      "modes": ["fleet", "gac-off"],
+      "tier": "S",
+      "notes": "Best offensive fleet. Finish Raddus capital abilities (Holdo Maneuver). IG-88 relic limits IG-2000."
+    },
+    {
+      "name": "FLEET: Negotiator (Galactic Republic)",
+      "faction": "Fleet",
+      "leader": "CAPITALNEGOTIATOR",
+      "members": ["JEDISTARFIGHTERANAKIN", "JEDISTARFIGHTERAHSOKATANO", "BLADEOFDORIN", "UMBARANSTARFIGHTER"],
+      "alternates": ["JEDISTARFIGHTERCONSULAR", "GEONOSIANSTARFIGHTER3"],
+      "modes": ["fleet", "gac-def"],
+      "tier": "A",
+      "notes": "Maxed capital abilities. Strong defensive holder."
+    },
+    {
+      "name": "FLEET: Endurance (Jedi)",
+      "faction": "Fleet",
+      "leader": "CAPITALJEDICRUISER",
+      "members": ["JEDISTARFIGHTERANAKIN", "JEDISTARFIGHTERAHSOKATANO", "BLADEOFDORIN", "UMBARANSTARFIGHTER"],
+      "alternates": ["JEDISTARFIGHTERCONSULAR"],
+      "modes": ["fleet", "gac-def"],
+      "tier": "A",
+      "notes": "Maxed capital abilities. Ready flex / 2nd defensive fleet."
+    },
+    {
+      "name": "Jabba the Hutt (Hutt Cartel) [BUILD-TOWARD]",
+      "faction": "Hutt Cartel",
+      "leader": "JABBATHEHUTT",
+      "members": ["BIBFORTUNA", "THIEFCADBANE", "KRRSANTAN", "BOBAFETTSCION"],
+      "alternates": [],
+      "modes": ["gac-def", "gac-off", "tw"],
+      "tier": "S",
+      "notes": "Top-tier team but requires unlocking Jabba (big journey). Awareness entry."
+    }
+  ]
+}

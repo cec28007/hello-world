@@ -36,6 +36,18 @@ and its meta are patch-dependent — answering from memory produces mistakes.
 
 ## Reference index
 
+**Available now:**
+
+| File | Covers |
+|------|--------|
+| `reference/07-decision-framework.md` | **How to decide what to build/farm next** — the prioritization logic |
+| `reference/08-player-profile.md` | Jaxen Sol's roster, active projects, and current plan |
+| `reference/09-team-analysis.md` | **Team-level roster analysis** — which teams you can field / build toward |
+| `data/meta_teams.json` | Curated meta-teams database (seed; expand + re-verify tiers) |
+| `tools/analyze_roster.py` | Script that scores a roster export against the database |
+
+**Deep-dive mechanics (being populated from source-verified research):**
+
 | File | Covers |
 |------|--------|
 | `reference/01-gac.md` | Grand Arena Championship: formats (5v5/3v3), board, **banner scoring**, defense holds, leagues/divisions/skill rating, rewards |
@@ -44,8 +56,21 @@ and its meta are patch-dependent — answering from memory produces mistakes.
 | `reference/04-progression.md` | Stars/shards, gear/G13, **relics**, **mods** (speed!), zetas/omicrons, datacrons, **Lightspeed tokens** |
 | `reference/05-currencies-economy.md` | Crystals, energy types, every store & currency, **Era currency**, resource priorities |
 | `reference/06-meta-teams.md` | Current best **GAC defensive & offensive teams**, GL priority (snapshot — verify) |
-| `reference/07-decision-framework.md` | **How to decide what to build/farm next** — the prioritization logic |
-| `reference/08-player-profile.md` | Jaxen Sol's roster, active projects, and current plan |
+
+## Team analysis workflow
+
+For "what team should I build toward" or "which of my teams should go on defense"
+questions, run the analyzer on the latest roster export:
+
+```
+python3 .claude/skills/swgoh-mechanics/tools/analyze_roster.py <export.json> \
+        --mode gac-def --relic-floor 5
+```
+
+It reports each team as READY / CLOSE / PROJECT / LOCKED, sorted so the
+highest-payoff, least-work build-toward targets (CLOSE + S/A tier) surface first.
+See `reference/09-team-analysis.md` for details and caveats (ships are judged by
+star level, not relic; relic values are raw export offsets).
 
 ## Core principles (the short version)
 
