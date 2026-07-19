@@ -124,8 +124,12 @@ def fmt_unit(st):
 
 
 def main():
+    default_roster = os.path.join(
+        os.path.dirname(__file__), "..", "data", "roster_snapshot.json")
     ap = argparse.ArgumentParser()
-    ap.add_argument("roster")
+    ap.add_argument("roster", nargs="?", default=default_roster,
+                    help="roster export JSON (defaults to the committed "
+                         "data/roster_snapshot.json)")
     ap.add_argument("--teams", default=os.path.join(
         os.path.dirname(__file__), "..", "data", "meta_teams.json"))
     ap.add_argument("--mode", default=None,

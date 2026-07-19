@@ -4,9 +4,12 @@ Roster-specific context for giving tailored advice. Update this whenever a fresh
 roster export (swgoh.gg JSON) is provided.
 
 - **Name / ally code:** Jaxen Sol — `611121817`
-- **Snapshot source:** uploaded swgoh.gg JSON export (latest processed:
-  2026-07-19). Live pulls via swgoh.gg were blocked in the build session; when
-  available, `fetch_swgoh.py` in this repo can refresh data.
+- **Canonical data (committed to the repo):**
+  `data/roster_snapshot.json` (full swgoh.gg export, updated 2026-07-19) and
+  `data/manual_inputs.json` (currencies/tickets no tool exposes). Read BOTH for
+  roster-grounded advice. `tools/analyze_roster.py` defaults to the snapshot.
+  Live auto-refresh is blocked until swgoh.gg is allowlisted in the environment
+  network policy — see `data/README.md`.
 - **Account:** ~7.46M GP total · ~4.66M character GP · ~2.79M ship GP · Level 85
 - **GAC:** Carbonite league, Division 2, skill rating ~2034
 - **Fleet Arena rank:** ~74 · **Squad Arena rank:** ~111
