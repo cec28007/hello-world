@@ -24,7 +24,7 @@ roster export (swgoh.gg JSON) is provided.
 | GL | State | Role |
 |----|-------|------|
 | **Leia Organa (GL)** | 7★ **R12** | Strongest single unit; top defensive wall (Rebels) |
-| **Rey (GL)** | 7★ **R10** | Best pure defensive-hold GL owned (Resistance) |
+| **Rey (GL)** | 7★, high relic (raw export `relic_tier` ~10 → offset; confirm displayed relic). **NOT fully maxed — Ultimate incomplete:** "Heir to the Light Side" screenshot shows *Journey in Progress*, Tier VI open, ~5 battles left | Best pure defensive-hold GL owned (Resistance). Finishing her **Ultimate** (Tier VI, light-side currency) is a real upgrade, not busywork |
 | **Jedi Master Luke (JML)** | 7★ **R8** | Best *offensive* GL owned (Jedi) |
 | **Supreme Leader Kylo Ren (SLKR)** | **In progress** — unlock journey started (0/330), Tier I requirements met | 4th GL; First Order |
 
