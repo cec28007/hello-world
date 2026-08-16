@@ -1,0 +1,33 @@
+{
+  "_comment": "Data NO tool exposes — the player records it by hand (a number or a screenshot). Copy to manual_inputs.json and keep it updated. Any session should read manual_inputs.json (if present) for currency/energy/inventory-gated advice. Dates help judge staleness.",
+  "as_of": "2026-07-19",
+  "currencies": {
+    "crystals": null,
+    "credits": null,
+    "gac_currency_aurodium": null,
+    "era_currency": 34704,
+    "guild_tokens_get1": null,
+    "guild_tokens_get2": null,
+    "guild_tokens_get3": null,
+    "shard_shop": null
+  },
+  "gl_ascension_tickets": {
+    "light_side": {"current": 0, "cap": 144, "as_of": "2026-07-19"},
+    "dark_side": {"current": 48, "cap": 144, "as_of": "2026-07-19"}
+  },
+  "energy": {
+    "regular": null,
+    "cantina": null,
+    "fleet": null,
+    "daily_refreshes_used": null
+  },
+  "key_gear_stockpile": {
+    "_comment": "Only if using HotUtils exports or tracking by hand; e.g. carbantis, kyrotechs, aeromagnifiers, signal data.",
+    "notes": null
+  },
+  "current_gac_defense": {
+    "_comment": "Your GAC defensive placements are NOT in the swgoh.gg export. Record them here if you want placement-aware advice.",
+    "squads": [],
+    "fleets": []
+  }
+}
